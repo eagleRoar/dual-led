@@ -1,0 +1,1 @@
+"D:\6.software\96.XJIDE\XJIDE\bin\slvo.exe" E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\dual_led_flash.cof >E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\dual_led_flash.cofv 2>&1

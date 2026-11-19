@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project>
+	<Name>dual_led_flash</Name>
+	<Path>E:\1.workspace\28.矽杰微\03-双路交替闪灯\03-Source\dual-led</Path>
+	<Chip>XC8P9525</Chip>
+	<FilterIndex>2</FilterIndex>
+	<FontSize>19</FontSize>
+	<Previous_Instruction_Set>0</Previous_Instruction_Set>
+	<FileList>
+		<File>E:\1.workspace\28.矽杰微\03-双路交替闪灯\03-Source\dual-led\main.c</File>
+	</FileList>
+	<H_FileList>
+		<H_File>E:\1.workspace\28.矽杰微\03-双路交替闪灯\03-Source\dual-led\XC8P9525.h</H_File>
+		<H_File>E:\1.workspace\28.矽杰微\03-双路交替闪灯\03-Source\dual-led\XJ_9525Define.h</H_File>
+	</H_FileList>
+	<List_FileList>
+		<List_File>E:\1.workspace\28.矽杰微\03-双路交替闪灯\03-Source\dual-led\dual_led_flash.lst</List_File>
+	</List_FileList>
+	<Options>
+		<OPTIONVALUE0>1FFF</OPTIONVALUE0>
+		<OPTIONVALUE1>3F77</OPTIONVALUE1>
+		<OPTIONVALUE2>1EFF</OPTIONVALUE2>
+		<OPTIONVALUE3>3BFF</OPTIONVALUE3>
+		<OPTIONVALUE4>3FFC</OPTIONVALUE4>
+		<OPTIONVALUE5>FFFF</OPTIONVALUE5>
+		<OPTIONVALUE6>FFFF</OPTIONVALUE6>
+		<OPTIONVALUE7>FFFF</OPTIONVALUE7>
+	</Options>
+</Project>

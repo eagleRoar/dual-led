@@ -1,0 +1,853 @@
+COFF File and Optional Headers
+Processor Type       xc8p9525
+Time Stamp           Thu Nov 19 16:14:22 2026
+Number of Sections   38
+Number of Symbols    167
+Characteristics      0x2
+  File is executable.
+
+Section Header
+Name                    sharebank
+Address                 0x20
+Size of Section         7
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_MAIN_0
+Address                 0x16
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_1
+Address                 0x17
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_2
+Address                 0x18
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_3
+Address                 0x19
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_4
+Address                 0x1a
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_5
+Address                 0x1b
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_6
+Address                 0x1c
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_MAIN_7
+Address                 0x1d
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    UD_abs_MAIN_10
+Address                 0x10
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_MAIN_11
+Address                 0x11
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UDL_MAIN_0
+Address                 0x12
+Size of Section         4
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x80
+  Uninitialized data.
+
+Section Header
+Name                    STARTUP
+Address                 0
+Size of Section         2
+Number of Relocations   0
+Number of Line Numbers  1
+Flags                   0x1020
+  Executable code.
+  Absolute.
+
+Line Number Table
+Line     Address  Symbol
+185      0        E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    c_interrupt
+Address                 0x3
+Size of Section         0
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x1020
+  Executable code.
+  Absolute.
+
+Section Header
+Name                    .org_8
+Address                 0x8
+Size of Section         90
+Number of Relocations   0
+Number of Line Numbers  45
+Flags                   0x1020
+  Executable code.
+  Absolute.
+
+Line Number Table
+Line     Address  Symbol
+205      0x8      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+206      0x9      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+207      0xa      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+208      0xb      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+210      0xc      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+211      0xd      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+213      0xe      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+214      0xf      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+216      0x10     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+217      0x11     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+219      0x12     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+220      0x13     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+221      0x14     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+222      0x15     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+224      0x16     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+225      0x17     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+228      0x18     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+229      0x19     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+230      0x1a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+231      0x1b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+233      0x1c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+234      0x1d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+235      0x1e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+236      0x1f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+237      0x20     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+241      0x21     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+242      0x22     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+243      0x23     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+244      0x24     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+246      0x25     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+248      0x26     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+249      0x27     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+252      0x28     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+254      0x29     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+257      0x2a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+259      0x2b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+260      0x2c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+261      0x2d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+262      0x2e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+264      0x2f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+266      0x30     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+269      0x31     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+270      0x32     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+271      0x33     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+274      0x34     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    code_MAIN
+Address                 0x6
+Size of Section         0
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x20
+  Executable code.
+
+Section Header
+Name                    S_MAIN__main
+Address                 0x7e
+Size of Section         56
+Number of Relocations   0
+Number of Line Numbers  28
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+298      0x7e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+300      0x7f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+302      0x80     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+304      0x81     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+305      0x82     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+307      0x83     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+308      0x84     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+309      0x85     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+312      0x86     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+315      0x87     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+317      0x88     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+319      0x89     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+321      0x8a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+323      0x8b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+325      0x8c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+326      0x8d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+328      0x8e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+330      0x8f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+333      0x90     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+334      0x91     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+335      0x92     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+336      0x93     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+338      0x94     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+340      0x95     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+341      0x96     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+344      0x97     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+345      0x98     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+347      0x99     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    S_MAIN__file_tick_1s
+Address                 0x5e
+Size of Section         64
+Number of Relocations   0
+Number of Line Numbers  32
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+364      0x5e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+366      0x5f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+367      0x60     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+368      0x61     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+369      0x62     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+371      0x63     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+373      0x64     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+375      0x65     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+376      0x66     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+377      0x67     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+378      0x68     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+380      0x69     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+382      0x6a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+384      0x6b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+385      0x6c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+386      0x6d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+387      0x6e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+389      0x6f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+390      0x70     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+391      0x71     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+392      0x72     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+394      0x73     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+396      0x74     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+399      0x75     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+400      0x76     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+401      0x77     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+402      0x78     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+404      0x79     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+406      0x7a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+407      0x7b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+409      0x7c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+412      0x7d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    S_MAIN__file_led_work_on
+Address                 0x1
+Size of Section         10
+Number of Relocations   0
+Number of Line Numbers  5
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+424      0x1      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+426      0x2      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+428      0x3      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+430      0x4      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+432      0x5      E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    S_MAIN__file_led_all_off
+Address                 0xbb
+Size of Section         8
+Number of Relocations   0
+Number of Line Numbers  4
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+444      0xbb     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+446      0xbc     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+448      0xbd     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+450      0xbe     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    S_MAIN__file_osc_check
+Address                 0x35
+Size of Section         82
+Number of Relocations   0
+Number of Line Numbers  41
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+465      0x35     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+467      0x36     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+469      0x37     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+470      0x38     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+471      0x39     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+472      0x3a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+474      0x3b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+475      0x3c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+476      0x3d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+477      0x3e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+478      0x3f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+479      0x40     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+480      0x41     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+481      0x42     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+482      0x43     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+483      0x44     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+484      0x45     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+485      0x46     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+486      0x47     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+487      0x48     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+489      0x49     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+490      0x4a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+492      0x4b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+494      0x4c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+495      0x4d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+496      0x4e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+497      0x4f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+498      0x50     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+499      0x51     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+500      0x52     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+501      0x53     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+504      0x54     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+506      0x55     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+507      0x56     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+508      0x57     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+509      0x58     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+511      0x59     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+514      0x5a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+516      0x5b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+517      0x5c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+520      0x5d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    S_MAIN__file_init
+Address                 0x9a
+Size of Section         44
+Number of Relocations   0
+Number of Line Numbers  22
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+535      0x9a     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+536      0x9b     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+538      0x9c     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+539      0x9d     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+541      0x9e     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+542      0x9f     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+544      0xa0     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+545      0xa1     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+547      0xa2     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+548      0xa3     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+550      0xa4     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+552      0xa5     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+553      0xa6     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+555      0xa7     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+556      0xa8     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+558      0xa9     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+559      0xaa     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+561      0xab     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+563      0xac     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+564      0xad     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+566      0xae     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+568      0xaf     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    S_MAIN__file_clrRam
+Address                 0xb0
+Size of Section         22
+Number of Relocations   0
+Number of Line Numbers  11
+Flags                   0x20
+  Executable code.
+
+Line Number Table
+Line     Address  Symbol
+580      0xb0     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+581      0xb1     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+583      0xb2     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+584      0xb3     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+585      0xb4     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+586      0xb5     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+588      0xb6     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+590      0xb7     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+591      0xb8     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+594      0xb9     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+596      0xba     E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+
+Section Header
+Name                    UD_abs_xc8p9525_0
+Address                 0
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_1
+Address                 0x1
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_2
+Address                 0x2
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_3
+Address                 0x3
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_4
+Address                 0x4
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_6
+Address                 0x6
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_8
+Address                 0x8
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_9
+Address                 0x9
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_a
+Address                 0xa
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_b
+Address                 0xb
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_c
+Address                 0xc
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_d
+Address                 0xd
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_e
+Address                 0xe
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    UD_abs_xc8p9525_f
+Address                 0xf
+Size of Section         1
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x5080
+  Uninitialized data.
+  Absolute.
+  Overlaid with other sections from different objects modules.
+
+Section Header
+Name                    code_xc8p9525
+Address                 0x6
+Size of Section         0
+Number of Relocations   0
+Number of Line Numbers  0
+Flags                   0x20
+  Executable code.
+
+Symbol Table
+Name                     Section          Value      Type  Class  NumAux 
+.file                    DEBUG            0          0     103    1   
+  file = E:\1.workspace\28.Îù½ÜÎ¢\03-Ë«Â·½»ÌæÉÁµÆ\03-Source\dual-led\obj\MAIN.asm
+  line included = 0
+.file                    DEBUG            0          0     103    1   
+  file = D:\6.software\96.XJIDE\XJIDE\include/XC8P9525.inc
+  line included = 10
+.list                    DEBUG            0x1        0     108    0   
+.nolist                  DEBUG            0x3        0     108    0   
+.list                    DEBUG            0x54       0     108    0   
+.eof                     DEBUG            0          0     107    0   
+sharebank                sharebank        0x20       0     109    1   
+  length = 7
+  number of relocations = 0
+  number of line numbers = 0
+STK06                    sharebank        0x20       0     2      0   
+STK05                    sharebank        0x21       0     2      0   
+STK04                    sharebank        0x22       0     2      0   
+STK03                    sharebank        0x23       0     2      0   
+STK02                    sharebank        0x24       0     2      0   
+STK01                    sharebank        0x25       0     2      0   
+STK00                    sharebank        0x26       0     2      0   
+UD_MAIN_0                UD_MAIN_0        0x16       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_tick500               UD_MAIN_0        0x16       0     2      0   
+UD_MAIN_1                UD_MAIN_1        0x17       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_sec                   UD_MAIN_1        0x17       0     2      0   
+UD_MAIN_2                UD_MAIN_2        0x18       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_min                   UD_MAIN_2        0x18       0     2      0   
+UD_MAIN_3                UD_MAIN_3        0x19       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_hour                  UD_MAIN_3        0x19       0     2      0   
+UD_MAIN_4                UD_MAIN_4        0x1a       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_mode                  UD_MAIN_4        0x1a       0     2      0   
+UD_MAIN_5                UD_MAIN_5        0x1b       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_work                  UD_MAIN_5        0x1b       0     2      0   
+UD_MAIN_6                UD_MAIN_6        0x1c       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_osc_ok                UD_MAIN_6        0x1c       0     2      0   
+UD_MAIN_7                UD_MAIN_7        0x1d       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_g_toggle                UD_MAIN_7        0x1d       0     2      0   
+UD_abs_MAIN_10           UD_abs_MAIN_10   0x10       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_A_BUFF                  UD_abs_MAIN_10   0x10       0     2      0   
+UD_abs_MAIN_11           UD_abs_MAIN_11   0x11       0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_R3_BUFF                 UD_abs_MAIN_11   0x11       0     2      0   
+UDL_MAIN_0               UDL_MAIN_0       0x12       0     109    1   
+  length = 4
+  number of relocations = 0
+  number of line numbers = 0
+_file_osc_check_i_1_16   UDL_MAIN_0       0x12       0     3      0   
+STARTUP                  STARTUP          0          0     109    1   
+  length = 2
+  number of relocations = 1
+  number of line numbers = 1
+c_interrupt              c_interrupt      0x3        0     109    1   
+  length = 0
+  number of relocations = 0
+  number of line numbers = 0
+__sdcc_interrupt         c_interrupt      0x3        0     6      0   
+_int_isr                 c_interrupt      0x3        0     2      0   
+.org_8                   .org_8           0x8        0     109    1   
+  length = 90
+  number of relocations = 28
+  number of line numbers = 45
+_00180_DS_               .org_8           0x18       0     6      0   
+_00182_DS_               .org_8           0x28       0     6      0   
+_00185_DS_               .org_8           0x2a       0     6      0   
+_00189_DS_               .org_8           0x31       0     6      0   
+END_OF_INTERRUPT         .org_8           0x34       0     6      0   
+code_MAIN                code_MAIN        0x6        0     109    1   
+  length = 0
+  number of relocations = 0
+  number of line numbers = 0
+S_MAIN__main             S_MAIN__main     0x7e       0     109    1   
+  length = 56
+  number of relocations = 19
+  number of line numbers = 28
+_main                    S_MAIN__main     0x7e       0     2      0   
+_00106_DS_               S_MAIN__main     0x86       0     6      0   
+_00107_DS_               S_MAIN__main     0x87       0     6      0   
+_00112_DS_               S_MAIN__main     0x90       0     6      0   
+_00109_DS_               S_MAIN__main     0x97       0     6      0   
+S_MAIN__file_tick_1s     S_MAIN__file_tick_1s 0x5e       0     109    1   
+  length = 64
+  number of relocations = 20
+  number of line numbers = 32
+_file_tick_1s            S_MAIN__file_tick_1s 0x5e       0     2      0   
+_00165_DS_               S_MAIN__file_tick_1s 0x75       0     6      0   
+_00174_DS_               S_MAIN__file_tick_1s 0x7d       0     6      0   
+S_MAIN__file_led_work_on S_MAIN__file_led_work_on 0x1        0     109    1   
+  length = 10
+  number of relocations = 4
+  number of line numbers = 5
+_file_led_work_on        S_MAIN__file_led_work_on 0x1        0     2      0   
+S_MAIN__file_led_all_off S_MAIN__file_led_all_off 0xbb       0     109    1   
+  length = 8
+  number of relocations = 3
+  number of line numbers = 4
+_file_led_all_off        S_MAIN__file_led_all_off 0xbb       0     2      0   
+S_MAIN__file_osc_check   S_MAIN__file_osc_check 0x35       0     109    1   
+  length = 82
+  number of relocations = 22
+  number of line numbers = 41
+_file_osc_check          S_MAIN__file_osc_check 0x35       0     2      0   
+_00135_DS_               S_MAIN__file_osc_check 0x3b       0     6      0   
+_00151_DS_               S_MAIN__file_osc_check 0x49       0     6      0   
+_00128_DS_               S_MAIN__file_osc_check 0x54       0     6      0   
+_00130_DS_               S_MAIN__file_osc_check 0x5a       0     6      0   
+_00137_DS_               S_MAIN__file_osc_check 0x5d       0     6      0   
+S_MAIN__file_init        S_MAIN__file_init 0x9a       0     109    1   
+  length = 44
+  number of relocations = 5
+  number of line numbers = 22
+_file_init               S_MAIN__file_init 0x9a       0     2      0   
+S_MAIN__file_clrRam      S_MAIN__file_clrRam 0xb0       0     109    1   
+  length = 22
+  number of relocations = 7
+  number of line numbers = 11
+_file_clrRam             S_MAIN__file_clrRam 0xb0       0     2      0   
+_00119_DS_               S_MAIN__file_clrRam 0xb2       0     6      0   
+_00117_DS_               S_MAIN__file_clrRam 0xb9       0     6      0   
+.eof                     DEBUG            0          0     107    0   
+.file                    DEBUG            0          0     103    1   
+  file = xc8p9525.asm
+  line included = 0
+.file                    DEBUG            0          0     103    1   
+  file = ../../share/header/xc8p9525.inc
+  line included = 10
+.list                    DEBUG            0x1        0     108    0   
+.nolist                  DEBUG            0x3        0     108    0   
+.list                    DEBUG            0x54       0     108    0   
+.eof                     DEBUG            0          0     107    0   
+UD_abs_xc8p9525_0        UD_abs_xc8p9525_0 0          0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_IARbits                 UD_abs_xc8p9525_0 0          0     2      0   
+_IAR                     UD_abs_xc8p9525_0 0          0     2      0   
+UD_abs_xc8p9525_1        UD_abs_xc8p9525_1 0x1        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_TCCbits                 UD_abs_xc8p9525_1 0x1        0     2      0   
+_TCC                     UD_abs_xc8p9525_1 0x1        0     2      0   
+UD_abs_xc8p9525_2        UD_abs_xc8p9525_2 0x2        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PCLbits                 UD_abs_xc8p9525_2 0x2        0     2      0   
+_PCL                     UD_abs_xc8p9525_2 0x2        0     2      0   
+UD_abs_xc8p9525_3        UD_abs_xc8p9525_3 0x3        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_STATUSbits              UD_abs_xc8p9525_3 0x3        0     2      0   
+_STATUS                  UD_abs_xc8p9525_3 0x3        0     2      0   
+UD_abs_xc8p9525_4        UD_abs_xc8p9525_4 0x4        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_RSRbits                 UD_abs_xc8p9525_4 0x4        0     2      0   
+_RSR                     UD_abs_xc8p9525_4 0x4        0     2      0   
+UD_abs_xc8p9525_6        UD_abs_xc8p9525_6 0x6        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PORT6bits               UD_abs_xc8p9525_6 0x6        0     2      0   
+_PORT6                   UD_abs_xc8p9525_6 0x6        0     2      0   
+UD_abs_xc8p9525_8        UD_abs_xc8p9525_8 0x8        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PWMCONbits              UD_abs_xc8p9525_8 0x8        0     2      0   
+_PWMCON                  UD_abs_xc8p9525_8 0x8        0     2      0   
+UD_abs_xc8p9525_9        UD_abs_xc8p9525_9 0x9        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PRDbits                 UD_abs_xc8p9525_9 0x9        0     2      0   
+_PRD                     UD_abs_xc8p9525_9 0x9        0     2      0   
+UD_abs_xc8p9525_a        UD_abs_xc8p9525_a 0xa        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PDC1bits                UD_abs_xc8p9525_a 0xa        0     2      0   
+_PDC1                    UD_abs_xc8p9525_a 0xa        0     2      0   
+UD_abs_xc8p9525_b        UD_abs_xc8p9525_b 0xb        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PDC2bits                UD_abs_xc8p9525_b 0xb        0     2      0   
+_PDC2                    UD_abs_xc8p9525_b 0xb        0     2      0   
+UD_abs_xc8p9525_c        UD_abs_xc8p9525_c 0xc        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_PDC3bits                UD_abs_xc8p9525_c 0xc        0     2      0   
+_PDC3                    UD_abs_xc8p9525_c 0xc        0     2      0   
+UD_abs_xc8p9525_d        UD_abs_xc8p9525_d 0xd        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_ICIECRbits              UD_abs_xc8p9525_d 0xd        0     2      0   
+_ICIECR                  UD_abs_xc8p9525_d 0xd        0     2      0   
+UD_abs_xc8p9525_e        UD_abs_xc8p9525_e 0xe        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_CPUCONbits              UD_abs_xc8p9525_e 0xe        0     2      0   
+_CPUCON                  UD_abs_xc8p9525_e 0xe        0     2      0   
+UD_abs_xc8p9525_f        UD_abs_xc8p9525_f 0xf        0     109    1   
+  length = 1
+  number of relocations = 0
+  number of line numbers = 0
+_ISRbits                 UD_abs_xc8p9525_f 0xf        0     2      0   
+_ISR                     UD_abs_xc8p9525_f 0xf        0     2      0   
+code_xc8p9525            code_xc8p9525    0x6        0     109    1   
+  length = 0
+  number of relocations = 0
+  number of line numbers = 0
+.eof                     DEBUG            0          0     107    0   
+
