@@ -12,11 +12,11 @@
 //   1脚 VDD / 8脚 GND
 //   2脚 OSCI(P65) / 3脚 OSCO(P64) → 32.768kHz 晶振
 //   4脚 P63（RST复用）→ 模式检测：悬空/高=定时模式，低=常亮模式
-//   5脚 P62 → 常亮 LED
-//   6脚 P61 → 交替 LED1
-//   7脚 P60 → 交替 LED2
+//   5脚 P62 → 常亮 LED（高电平点亮）
+//   6脚 P61 → 交替 LED1（低电平点亮）
+//   7脚 P60 → 交替 LED2（低电平点亮）
 //
-// LED 极性：原理图 LED 接 VCC，端口输出低电平点亮
+// LED 极性：P60/P61 接 VCC，低电平点亮；P62 接 GND，高电平点亮
 //--------------------------------------------------------------------//
 // 烧录选项（mpj）关键点：
 //   P63端口 = GPIO（绝不能设 RST，否则 4 脚接地会触发复位）
@@ -36,9 +36,13 @@
 #include "XC8P9525.h"
 #include "XJ_9525Define.h"
 
+//==================== 重要配置   ====================//
+#define DEBUG_MODE	  1	
 //==================== 可配置常量 ====================//
-#define LED_ON        0            // 低电平点亮
-#define LED_OFF       1
+#define LED_ALT_ON    0            // P60/P61：低电平点亮
+#define LED_ALT_OFF   1
+#define LED_CONST_ON  1            // P62：高电平点亮
+#define LED_CONST_OFF 0
 
 #define RTC_CONT_FAST 0x82         // RTCS=1, PAB=0, PSR=010 -> TCC 8分频
 #define TCC_FAST      255          // 8*(256-255)/(32768/4) = 1/1024 s
@@ -104,9 +108,10 @@ void main()
 {
     file_clrRam();                 // 清 RAM
     file_init();                   // IO 初始化（LED 全灭）
-
+#if(0 == DEBUG_MODE)
+	//debug 版本下不检查晶振
     file_osc_check();              // 上电检测晶振，失败则停机
-
+#endif
     // 读 4 脚判定工作模式
     if(PIN_MODE == 0)
         g_mode = MODE_ALWAYS;      // 接地 → 常亮模式
@@ -234,16 +239,16 @@ void file_osc_check(void)
 //================================================//
 void file_led_all_off(void)
 {
-    LED_CONST = LED_OFF;
-    LED_ALT_A = LED_OFF;
-    LED_ALT_B = LED_OFF;
+    LED_CONST = LED_CONST_OFF;
+    LED_ALT_A = LED_ALT_OFF;
+    LED_ALT_B = LED_ALT_OFF;
 }
 
 void file_led_work_on(void)
 {
-    LED_CONST = LED_ON;            // 5脚常亮
-    LED_ALT_A = LED_ON;            // 6脚先亮 [待确认]
-    LED_ALT_B = LED_OFF;           // 7脚先灭
+    LED_CONST = LED_CONST_ON;      // 5脚常亮（高电平点亮）
+    LED_ALT_A = LED_ALT_ON;        // 6脚先亮 [待确认]
+    LED_ALT_B = LED_ALT_OFF;       // 7脚先灭
 }
 
 //================================================//
@@ -257,16 +262,16 @@ void file_leds_update(unsigned char work_now)
         return;
     }
 
-    LED_CONST = LED_ON;
+    LED_CONST = LED_CONST_ON;
     if((g_tick & HALF_TICK_BIT) == 0)
     {
-        LED_ALT_A = LED_ON;
-        LED_ALT_B = LED_OFF;
+        LED_ALT_A = LED_ALT_ON;
+        LED_ALT_B = LED_ALT_OFF;
     }
     else
     {
-        LED_ALT_A = LED_OFF;
-        LED_ALT_B = LED_ON;
+        LED_ALT_A = LED_ALT_OFF;
+        LED_ALT_B = LED_ALT_ON;
     }
 }
 
