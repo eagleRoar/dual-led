@@ -23,6 +23,14 @@
 //   RTC = 使能
 //   振荡模式 = IRC 8M；Clocks = 4 Clocks
 //   晶振脚内置电容 = 25pF（原理图未外挂电容）
+//
+// 时基说明：
+//   RTC 时 TCC 时钟 = LXT/4 = 8192Hz。
+//   工作期：CONT=0x82（预分频8）、TCC=255 → 1024Hz 中断（0.9766ms/次），
+//           g_tick 以 1/1024 秒为刻度累加，get_time_ms() 换算为 1ms 粒度。
+//   关闭期：切回 CONT=0x84（预分频32）、TCC=128 → 500ms 中断，g_tick 每次 +512，
+//           接口不变且 CPU 只在 500ms 醒来一次，保持低功耗。
+//   24 小时 = 88473600 ticks；工作 6 小时 = 22118400 ticks。
 //====================================================================//
 
 #include "XC8P9525.h"
@@ -32,12 +40,14 @@
 #define LED_ON        0            // 低电平点亮
 #define LED_OFF       1
 
-// TCC=128, 32分频：T=(1/32768)*4*32*(256-128)=0.5s
-#define RTC_TCC_INIT  128
-#define TICKS_PER_SEC 2            // 1 秒 = 2 个 500ms 节拍
+#define RTC_CONT_FAST 0x82         // RTCS=1, PAB=0, PSR=010 -> TCC 8分频
+#define TCC_FAST      255          // 8*(256-255)/(32768/4) = 1/1024 s
+#define RTC_CONT_SLOW 0x84         // RTCS=1, PAB=0, PSR=100 -> TCC 32分频
+#define TCC_SLOW      128          // 32*(256-128)/(32768/4) = 0.5 s
 
-#define WORK_HOURS    6            // 定时模式：工作 6 小时
-#define CYCLE_HOURS   24           // 定时模式：循环周期 24 小时（工作6 + 关闭18）
+#define DAY_TICKS     88473600UL   // 24h * 1024
+#define WORK_TICKS    22118400UL   // 6h  * 1024
+#define HALF_TICK_BIT 0x0200UL     // bit9：512 ticks = 500ms
 
 #define OSC_TIMEOUT   2            // 晶振检测超时（秒），建议 >=1，[待实测]
 
@@ -51,14 +61,10 @@
 #define PIN_MODE      PORT6_3      // 4脚：模式检测输入
 
 //==================== 全局变量 ====================//
-volatile unsigned char g_tick500;      // 500ms 节拍计数，满 2 为 1 秒
-volatile unsigned char g_sec;          // 秒 0..59
-volatile unsigned char g_min;          // 分 0..59
-volatile unsigned char g_hour;         // 时 0..23
-volatile unsigned char g_mode;         // MODE_TIMER / MODE_ALWAYS
-volatile unsigned char g_work;         // 1=工作期(亮灯)，0=关闭期(灭灯)
-volatile unsigned char g_osc_ok;       // 晶振检测：收到首个中断置 1
-volatile unsigned char g_toggle;       // 交替闪烁相位
+volatile unsigned long g_tick;     // 1/1024 秒刻度，整天循环（0..DAY_TICKS-1）
+volatile unsigned char g_mode;     // MODE_TIMER / MODE_ALWAYS
+volatile unsigned char g_osc_ok;   // 晶振检测：收到首个中断置 1
+volatile unsigned char g_fast;     // 1=1024Hz 工作期节拍，0=500ms 关闭期节拍
 
 //==================== 函数声明 ====================//
 void file_clrRam(void);
@@ -66,7 +72,30 @@ void file_init(void);
 void file_osc_check(void);
 void file_led_all_off(void);
 void file_led_work_on(void);
-void file_tick_1s(void);
+void file_leds_update(unsigned char work_now);
+void file_timer_set(unsigned char fast);
+unsigned long get_time_ms(void);
+
+//================================================//
+// get_time_ms：返回当天已运行的毫秒数（0..86399999）
+// g_tick 为 1/1024 秒刻度，避免变量乘法/除法，仅用移位与减法换算。
+//================================================//
+unsigned long get_time_ms(void)
+{
+    unsigned long sec;
+    unsigned long rem;
+    unsigned long ms;
+
+    sec = g_tick >> 10;
+    rem = g_tick & 0x03FFUL;
+
+    // sec * 1000 = sec*1024 - sec*16 - sec*8
+    ms = (sec << 10) - (sec << 4) - (sec << 3);
+    // rem * 1000 / 1024，先乘再右移，rem 最大 1023 不会溢出
+    ms += (((rem << 10) - (rem << 4) - (rem << 3)) >> 10);
+
+    return ms;
+}
 
 //================================================//
 // MAIN 主程序
@@ -84,21 +113,16 @@ void main()
     else
         g_mode = MODE_TIMER;       // 悬空/高 → 定时模式
 
-    g_hour = 0;
-    g_min  = 0;
-    g_sec  = 0;
-    g_tick500 = 0;
-    g_toggle = 0;
-    g_work = 1;                    // 上电先进入工作期
-
+    g_tick = 0;
+    g_fast = 1;                    // 上电先进入工作期（1024Hz 节拍）
     file_led_work_on();            // 开灯：常亮 + 交替
     EI();                          // 打开总中断
 
     while(1)
     {
-        if(g_work == 0)
+        if((g_mode == MODE_TIMER) && (g_tick >= WORK_TICKS))
         {
-            // 定时模式关闭期（18h）：进入 SLEEP，由 RTC 中断唤醒
+            // 定时模式关闭期（18h）：进入 SLEEP，由 RTC 500ms 中断唤醒
             // RTC 模式下 TCCWE=1 & RTCS=1，休眠时 LXT 继续工作
             SLEEP();
             NOP();
@@ -142,9 +166,8 @@ void file_init(void)
     // 上电 LED 全灭（低电平点亮，故输出高）
     file_led_all_off();
 
-    //---- RTC 配置：TCC 由外部 32.768kHz 驱动，500ms 中断 ----//
-    CONTW(0x84);                   // RTCS=1（选 LXT/4）+ 32 分频
-    TCC = RTC_TCC_INIT;            // 初值 128 → 500ms 溢出
+    //---- RTC 配置：工作期 1024Hz，关闭期由 ISR 切回 500ms ----//
+    file_timer_set(1);
 
     CPUCON = 0x08;                 // TCCWE=1：允许 RTC 在 SLEEP 中唤醒并维持 LXT
                                    // 其余位保持 0（高速模式、IRC）
@@ -153,6 +176,25 @@ void file_init(void)
     IOCP_W(IMR,0x01);              // 使能 TCC/RTC 中断
 
     g_osc_ok = 0;
+}
+
+//================================================//
+// 切换 RTC 节拍：调用时要求中断关闭（初始化阶段或 ISR 内）
+//================================================//
+void file_timer_set(unsigned char fast)
+{
+    if(fast)
+    {
+        CONTW(RTC_CONT_FAST);
+        TCC = TCC_FAST;            // 写 TCC 会清预分频器，周期从写入后重新计算
+        g_fast = 1;
+    }
+    else
+    {
+        CONTW(RTC_CONT_SLOW);
+        TCC = TCC_SLOW;
+        g_fast = 0;
+    }
 }
 
 //================================================//
@@ -165,7 +207,7 @@ void file_osc_check(void)
     volatile unsigned long i;
 
     g_osc_ok = 0;
-    EI();                          // 开中断，等首个 RTC 中断
+    EI();                          // 开中断，等首个 RTC 中断（约 1ms 后到来）
 
     // 基于 IRC 的软件延时约 OSC_TIMEOUT 秒
     // [待实测] 8MHz/4T 下本循环实际时长需校准
@@ -202,87 +244,86 @@ void file_led_work_on(void)
     LED_CONST = LED_ON;            // 5脚常亮
     LED_ALT_A = LED_ON;            // 6脚先亮 [待确认]
     LED_ALT_B = LED_OFF;           // 7脚先灭
-    g_toggle = 0;
 }
 
 //================================================//
-// 1 秒累计（由 2 个 500ms 节拍触发）
+// 按当前时刻刷新 LED：相位直接取自 g_tick 的 bit9（512 ticks = 500ms）
 //================================================//
-void file_tick_1s(void)
+void file_leds_update(unsigned char work_now)
 {
-    g_sec++;
-    if(g_sec >= 60)
+    if(work_now == 0)
     {
-        g_sec = 0;
-        g_min++;
-        if(g_min >= 60)
-        {
-            g_min = 0;
-            g_hour++;
+        file_led_all_off();
+        return;
+    }
 
-            if(g_mode == MODE_TIMER)
-            {
-                if(g_hour >= WORK_HOURS)
-                {
-                    // 工作 6 小时到：关闭全部 LED
-                    g_work = 0;
-                    file_led_all_off();
-                }
-                if(g_hour >= CYCLE_HOURS)
-                {
-                    // 24 小时到：从头循环
-                    g_hour = 0;
-                    g_work = 1;
-                    file_led_work_on();
-                }
-            }
-            // 常亮模式不做周期切换，直到电池耗尽（软件无需判断）
-        }
+    LED_CONST = LED_ON;
+    if((g_tick & HALF_TICK_BIT) == 0)
+    {
+        LED_ALT_A = LED_ON;
+        LED_ALT_B = LED_OFF;
+    }
+    else
+    {
+        LED_ALT_A = LED_OFF;
+        LED_ALT_B = LED_ON;
     }
 }
 
 //================================================//
 // 中断服务程序
-// RTC 模式：TCC 由 LXT 驱动。TCC 为 8 位上行计数器，
-// 溢出后从 0 重新计数，故每次中断须手动重装初值 128，
-// 才能维持 500ms 周期。[待实测] 确认重装时机与标志清除顺序
+// RTC 模式：TCC 由 LXT 驱动，8 位上行计数器。
+// 工作期重装 255 → 1024Hz；关闭期重装 128 → 500ms。
+// 写 TCC 会清预分频器，因此周期稳定。
 //================================================//
 void int_isr(void) __interrupt
 {
+    unsigned char work_now;
+    unsigned char new_fast;
+    unsigned char osc_ready;
+
     __asm__("org 0x08");
     PUSH(_A_BUFF,_R3_BUFF);
 
     if(TCIF)
     {
         ISR = 0xfe;                // 清 TCIF
-        TCC = RTC_TCC_INIT;        // 重装初值，维持 500ms 周期
 
-        if(g_osc_ok == 0)
+        if(g_fast)
+        {
+            TCC = TCC_FAST;        // 1024Hz 节拍
+            g_tick++;
+        }
+        else
+        {
+            TCC = TCC_SLOW;        // 500ms 节拍
+            g_tick += 512;
+        }
+
+        if(g_tick >= DAY_TICKS)    // 24h 循环
+            g_tick -= DAY_TICKS;
+
+        osc_ready = g_osc_ok;
+        if(osc_ready == 0)
             g_osc_ok = 1;          // 首个中断：晶振正常
 
-        if(g_work == 1)
+        // 晶振检测阶段保持 LED 全灭，确认后 main 再开灯
+        work_now = 0;
+        if(osc_ready)
         {
-            //---- 500ms 交替闪烁 ----//
-            g_toggle = !g_toggle;
-            if(g_toggle)
-            {
-                LED_ALT_A = LED_ON;
-                LED_ALT_B = LED_OFF;
-            }
-            else
-            {
-                LED_ALT_A = LED_OFF;
-                LED_ALT_B = LED_ON;
-            }
+            work_now = 1;
+            if((g_mode == MODE_TIMER) && (g_tick >= WORK_TICKS))
+                work_now = 0;      // 6h 后进入关闭期
         }
 
-        //---- 计时：每 2 个节拍 = 1 秒（关闭期也需计时）----//
-        g_tick500++;
-        if(g_tick500 >= TICKS_PER_SEC)
-        {
-            g_tick500 = 0;
-            file_tick_1s();
-        }
+        file_leds_update(work_now);
+
+        // 工作期用 1024Hz 保证 1ms 粒度；关闭期用 500ms 保持低功耗
+        new_fast = 1;
+        if(osc_ready && (g_mode == MODE_TIMER) && (g_tick >= WORK_TICKS))
+            new_fast = 0;
+        if(new_fast != g_fast)
+            file_timer_set(new_fast);
     }
 
     POP(_A_BUFF,_R3_BUFF);
