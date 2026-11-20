@@ -1,0 +1,34 @@
+# 默认忽略所有文件，只保留源码和必要工程配置
+*
+!*/
+!.gitignore
+!.gitattributes
+
+# C / C++ 源码与头文件
+!*.c
+!*.h
+
+# 汇编源文件
+!*.asm
+!*.inc
+!*.s
+!*.S
+
+# XJIDE 工程配置（保留，否则重新拉取后无法直接打开工程）
+!*.mpj
+
+# 编译中间目录始终忽略（包括 obj/MAIN.asm 等自动生成文件）
+# 保留 obj/.gitkeep，确保新克隆的工程仍有 obj 目录（XJIDE 编译需要）
+**/obj/*
+!**/obj/.gitkeep
+
+# 常见构建产物（即使扩展名被上面的规则放行，也在这里明确忽略）
+*.xbin
+*.cod
+*.cof
+*.cofv
+*.lst
+*.map
+*.o
+*.out
+*.err
