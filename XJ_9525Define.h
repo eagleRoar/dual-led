@@ -22,7 +22,8 @@
 /************************************/
 //-----------寄存器读写示例----------  
 /************************************/
-#define CONTW(VAL)			__asm__("mov a,@"#VAL"\n ctw")			//CTW = VAL：CONT寄存器赋值
+#define CONTW_(VAL)			__asm__("mov a,@"#VAL"\n ctw")			//内部宏：先展开VAL再转字符串
+#define CONTW(VAL)			CONTW_(VAL)						//CTW = VAL：CONT寄存器赋值（支持传入宏）
 #define IOCP_W(REG,VAL)		__asm__("mov a,@"#VAL"\n iw "#REG)		//REG = VAL：IOC页寄存器赋值
 #define IOCP_R(RAM,REG)		__asm__("ir "#REG"\n mov "#RAM",a")		//RAM = REG：IOC页寄存器读值
 
