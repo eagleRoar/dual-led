@@ -20,18 +20,20 @@
 //   两脚必须推挽输出（ODCR=0），驱动增强开到最大档（HDSxCR=0x55）。
 //--------------------------------------------------------------------//
 // 二、行为（对标实测）
-//   上电  ：延时 500ms 并检测晶振起振，未起振则灯全灭、芯片不工作（需求1）
-//   M1    ：慢速交替，每 500ms 换一路，直接交接无灭灯间隔，20 拍 = 10s
+//   时基  ：由 USE_INTERNAL_RC_CLOCK 选择，一拍 ≈500ms（内部RC 499.7 / 晶振 500.0）
+//   上电  ：延时一拍（≈500ms）后立即点亮第一路；外部晶振未起振则灯一直不亮（需求1）
+//   M1    ：慢速交替，每拍换一路，直接交接无灭灯间隔，20 拍 ≈ 10s
 //   M2    ：约 9.5k~19kHz 互补 PWM，占空比 2%到100% 线性三角扫描，
-//           三角周期约 2.92s（单程 1.46s），峰顶 A 全开约 7.5ms，85 拍 = 42.5s
-//   循环  ：M1 → M2 → M1 … 共 105 拍 = 52.5s（实测 52.65s）
+//           三角周期约 2.95s（单程 1.47s），峰顶 A 全开约 7.5ms，85 拍 ≈ 42.5s
+//   循环  ：M1 → M2 → M1 … 共 105 拍 ≈ 52.5s（实测 52.66s）
 //   定时模式：从上电开始计时，工作 6h 后关灯 18h，24h 循环
 //   常亮模式（4脚接地）：不做 6h/18h 循环，一直按 M1→M2 循环
 //--------------------------------------------------------------------//
 // 三、烧录选项（必须在 XJIDE 中确认，否则现象完全不符）
 //   P63 端口       = GPIO（绝不能选 RST，否则 4 脚接地会复位）
-//   RTC            = 使能（TCC 时钟取 LXT/4）★不开会退化成指令周期计时，
-//                    现象是 M1 只有约 39ms、整灯快约 256 倍
+//   RTC            = 使能（TCC 时钟取 LXT/4，仅 USE_INTERNAL_RC_CLOCK=0 需要）
+//                    ★不开会退化成指令周期计时，现象是 M1 只有约 82ms、
+//                      整灯快约 122 倍
 //   振荡模式       = IRC 8MHz；Clocks 要与下面的 FCPU_MHZ 一致：
 //                    4 Clocks → FCPU_MHZ=2（2MHz，PWM 约 9.5kHz）
 //                    2 Clocks → FCPU_MHZ=4（4MHz，PWM 约 19kHz，需 LVR=2.5V）
@@ -43,13 +45,29 @@
 #include "XC8P9525.h"
 #include "XJ_9525Define.h"
 
+//==================== 版本 ====================//
+// 仅用于标识，不参与任何逻辑，也不占用 ROM（未被引用）。
+// 改固件时同步更新，方便沟通时说"0.0.1 版"。
+#define VERSION    "0.0.1"
+
 //==================== 编译开关 ====================//
-// 1 = 仿真板（无晶振）：跳过 500ms 延时与晶振检测，TCC 走指令周期分频
-// 0 = 正式板（有晶振）：上电延时 500ms + 晶振检测，TCC 由 LXT 驱动
-#define DEBUG_MODE    1
+// 时基源：只决定"一拍是多少秒"，两种取值共用同一套节拍逻辑
+//（M1 = 20 拍、M2 = 85 拍、循环 = 105 拍），节拍参数与中断程序完全一致。
+//
+//   1 = 内部 RC 振荡器（仿真板用，板上无晶振）
+//       TCC 时钟 = 指令周期，预分频 1:32，重装 0（256 计数）
+//         主频 2MHz -> 一次中断 4.096ms，122 次 = 一拍 499.7ms
+//         主频 4MHz -> 一次中断 2.048ms，244 次 = 一拍 499.7ms
+//       上电晶振检测照常执行（本质是等第一拍中断），SLEEP 自动禁用
+//
+//   0 = 外部 32.768kHz 晶振（正式板用）
+//       TCC 时钟 = 晶振/4 = 8192Hz，预分频 1:32 -> 256Hz，重装 128
+//       128 计数 = 一拍 500.0ms，SLEEP 由 USE_SLEEP 决定
+#define USE_INTERNAL_RC_CLOCK   1
 
 // 定时模式关闭期（18h）是否 SLEEP 省电（前提：OPTION[RTC]=使能）
-#define USE_SLEEP     1
+// 第一批样片建议 0：内部 RC 时基在 SLEEP 下停振，唤醒无法在仿真板验证
+#define USE_SLEEP     0
 
 // 指令周期频率，必须与烧录选项【Clocks】对应，否则 PWM 载波和 M2 扫描速度会差 2 倍：
 //   Clocks = 4 Clocks  ->  FCPU_MHZ = 2   （IRC 8MHz / 4 = 2MHz）
@@ -57,32 +75,30 @@
 #define FCPU_MHZ      2
 
 //==================== 时基 ====================//
-// 正式板：TCC 时钟 = LXT/4 = 8192Hz，PSR=1:32 得 256Hz，重装 128 得 500ms/次
+// 内部 RC（仿真板）：TCC 时钟 = 指令周期，预分频 1:32，重装 0 -> 256 计数
+//   主频 2MHz：62.5kHz x 256 = 4.096ms/次，TICKS_PER_BEAT=122 -> 499.7ms/拍
+//   主频 4MHz：125kHz  x 256 = 2.048ms/次，TICKS_PER_BEAT=244 -> 499.7ms/拍
+// 外部晶振（正式板）：TCC 时钟 = 晶振/4 = 8192Hz，预分频 1:32 -> 256Hz
+//   重装 128 -> 128 计数 = 500.0ms/拍，TICKS_PER_BEAT=1
 //   【关键前提】OPTION[RTC] 必须 = 使能，否则 CONT.7(RTCS) 被当成普通读写位，
-//   TCC 会退回指令周期时钟：PSR 1:32、重装 128、Fcpu 2MHz 时约 1.96ms 一次，
-//   现象就是 M1 只有 20*1.96ms 约 39ms，整灯快约 256 倍（不是 M1 逻辑的问题）。
-// 仿真板：TCC 时钟 = 指令周期，先出 1ms 中断，再软件分频 500 次得到 500ms 拍
-#if DEBUG_MODE
-  #if (FCPU_MHZ == 4)
-    #define CONT_INIT    0x04      // PSR=100 1:32 -> 125kHz
-    #define TCC_RELOAD   131       // 125 计数 = 1ms
-  #else
-    #define CONT_INIT    0x02      // PSR=010 1:8  -> 250kHz
-    #define TCC_RELOAD   6         // 250 计数 = 1ms
-  #endif
-  #define TICK_DIV     500
-  #define CAN_SLEEP    0
+//   TCC 会退回指令周期时钟：PSR 1:32、重装 0、Fcpu 2MHz 时 4.096ms 一次，
+//   现象就是 M1 只有 20*4.096ms 约 82ms、整灯快约 122 倍（不是 M1 逻辑的问题）。
+#if USE_INTERNAL_RC_CLOCK
+  #define CONT_INIT        0x04    // PSR=100 1:32
+  #define TCC_RELOAD       0       // 256 计数
+  #define TICKS_PER_BEAT   (122 * FCPU_MHZ / 2)
+  #define CAN_ENTER_SLEEP  0       // 内部 RC 时基在 SLEEP 下停振，禁止休眠
 #else
-  #define CONT_INIT    0x84        // RTCS=1, PSR=100 1:32
-  #define TCC_RELOAD   128         // 128 计数 = 500ms
-  #define TICK_DIV     1
-  #define CAN_SLEEP    USE_SLEEP
+  #define CONT_INIT        0x84    // RTCS=1, PSR=100 1:32
+  #define TCC_RELOAD       128     // 128 计数 = 500ms
+  #define TICKS_PER_BEAT   1
+  #define CAN_ENTER_SLEEP  USE_SLEEP
 #endif
 
-//==================== 节拍参数（1 拍 = 500ms）====================//
-#define M1_N       20          // M1：20 拍 = 10s（实测 10.03s）
-#define M2_N       85          // M2：85 拍 = 42.5s（实测 42.62s）
-#define CYCLE_N    105         // 一个循环 105 拍 = 52.5s（实测 52.65s）
+//==================== 节拍参数（1 拍 ≈ 500ms）====================//
+#define M1_N       20                    // M1：20 拍 ≈ 10s（实测 10.02s）
+#define M2_N       85                    // M2：85 拍 ≈ 42.5s（实测 42.64s）
+#define CYCLE_N    (M1_N + M2_N)         // 一个循环 105 拍 ≈ 52.5s（实测 52.66s）
 
 #define WORK_TICKS 43200UL     // 6h  = 21600s / 0.5s
 #define DAY_TICKS  172800UL    // 24h = 86400s / 0.5s
@@ -90,7 +106,7 @@
 //==================== M2 软件 PWM 参数 ====================//
 // 一个 PWM 周期切成 50 份：A 路 g_d 份 + B 路 g_e 份（g_d+g_e 恒为 M2_UNIT）
 #define M2_UNIT     50         // 每周期 50 个时间单位
-#define M2_DMAX     49         // A 路最大 49 份（B 至少留 1 份）
+#define M2_DUTY_MAX 49         // A 路最大 49 份（B 至少留 1 份）
 #define PWM_TCY     211        // 一个 PWM 周期的指令周期数，见 file_m2_block 的周期账
 #define M2_STEP     (unsigned int)(30400UL * FCPU_MHZ / PWM_TCY)   // 一级驻留 30.4ms
 #define M2_PEAK     (unsigned int)(7500UL  * FCPU_MHZ / PWM_TCY)   // 峰顶保持 7.5ms
@@ -106,14 +122,14 @@
 #define PIN_MODE   PORT6_3     // 4脚：模式检测输入
 
 //==================== 全局变量 ====================//
-volatile unsigned long g_tick;    // 0.5s 计时（0..DAY_TICKS-1）
-volatile unsigned char g_mode;    // MODE_TIMER / MODE_ALWAYS
-volatile unsigned char g_osc_ok;  // 首个 500ms 中断后置 1（晶振正常）
-volatile unsigned int  g_div;     // 仿真板：1ms 到 500ms 的分频计数（必须 16 位）
-volatile unsigned char g_cyc;     // 循环内拍序号 1..CYCLE_N
-volatile unsigned char g_out;     // M1 相位：1=A 路，0=B 路
-volatile unsigned char g_off;     // 1=定时模式关闭期
-volatile unsigned char g_m2on;    // 1=主循环需执行 M2 扫描
+volatile unsigned long g_tick;          // 拍计时（0..DAY_TICKS-1）
+volatile unsigned char g_mode;          // MODE_TIMER / MODE_ALWAYS
+volatile unsigned char g_osc_ok;        // 首个中断到来后置 1（时基已工作）
+volatile unsigned int  g_beat_ticks;    // 本拍内已过的 tick 数（必须 16 位）
+volatile unsigned char g_cyc;           // 循环内拍序号 1..CYCLE_N
+volatile unsigned char g_out;           // M1 相位：1=A 路，0=B 路
+volatile unsigned char g_off;           // 1=定时模式关闭期
+volatile unsigned char g_m2on;          // 1=主循环需执行 M2 扫描
 
 // 下面 4 个变量被内联汇编直接读写，必须保持 volatile
 volatile unsigned char g_d;       // A 路单位数
@@ -140,22 +156,21 @@ void main(void)
     file_clrRam();                 // 清 RAM
     file_init();                   // 端口 + 时基 + 变量清零
 
-#if DEBUG_MODE
-    // 仿真板无晶振：不做 500ms 延时与晶振检测
-    g_osc_ok = 0;
-    g_div    = 0;
-    g_tick   = 0;
-#else
-    file_osc_check();              // 需求1：500ms 延时 + 晶振起振检测
-#endif
+    // 需求1：开机延时一拍（内部 RC 499.7ms / 晶振 500ms），延时期间灯全灭。
+    // 这一拍同时用于等待时基工作；外部晶振不起振则停在此处，灯一直不亮。
+    file_osc_check();
 
     // 延时结束后再判 4 脚（此时 P63 上拉已稳定）
     if(PIN_MODE == 0) g_mode = MODE_ALWAYS;
     else              g_mode = MODE_TIMER;
 
-    g_cyc = 0;
-    g_out = 0;
+    // 延时结束的这一拍直接算作 M1 的第 1 拍：开机 ≈500ms 立即点亮 A 路，
+    // 不再多等一拍。M1 仍为 20 拍、M2 仍为 85 拍，只是整段提前 500ms。
+    g_cyc = 1;
+    g_out = 1;
     g_off = 0;
+    file_m1_out();
+    LED_C = 1;
 
     EI();                          // 开总中断，此后节拍由 ISR 驱动
 
@@ -164,13 +179,12 @@ void main(void)
         if(g_m2on)
         {
             file_m2_run();         // M2：阻塞执行占空比扫描，直到 g_m2on 被清 0
-            // 防止 PWM 状态残留在引脚上，按当前 M1 相位再刷一次
-            if(g_m2on == 0) file_m1_out();
+            file_m1_out();         // 清掉残余 PWM 状态，按当前 M1 相位重刷引脚
         }
         else if(g_off)
         {
-#if CAN_SLEEP
-            SLEEP();               // 18h 关闭期：等 TCC 500ms 中断唤醒
+#if CAN_ENTER_SLEEP
+            SLEEP();               // 18h 关闭期：等 TCC 中断唤醒
 #endif
             NOP();
         }
@@ -213,38 +227,39 @@ void file_init(void)
     LED_C = 0;
 
     // 全部全局变量显式清零（udata 不保证上电为 0）
-    g_tick   = 0;
-    g_div    = 0;
-    g_cyc    = 0;
-    g_out    = 0;
-    g_off    = 0;
-    g_m2on   = 0;
-    g_osc_ok = 0;
-    g_mode   = MODE_TIMER;
-    g_d      = 1;
-    g_e      = M2_UNIT - 1;
-    g_cnt    = 0;
-    g_nb     = 0;
+    g_tick       = 0;
+    g_beat_ticks = 0;
+    g_cyc        = 0;
+    g_out        = 0;
+    g_off        = 0;
+    g_m2on       = 0;
+    g_osc_ok     = 0;
+    g_mode       = MODE_TIMER;
+    g_d          = 1;
+    g_e          = M2_UNIT - 1;
+    g_cnt        = 0;
+    g_nb         = 0;
 
     // 时基：按手册要求，切换 PSR 前先关 WDT
     IOCP_W(WDTCR, 0x00);
     CONTW(CONT_INIT);              // RTCS/PSR 设定
     TCC = TCC_RELOAD;              // 重装（同时清预分频器）
 
-    CPUCON = 0x08;                 // TCCWE=1：休眠时 LXT 继续工作并可唤醒
+    CPUCON = 0x08;                 // TCCWE=1：休眠时时基继续工作并可唤醒
     ISR    = 0x00;                 // 清全部中断标志
     IOCP_W(IMR, 0x01);             // 只使能 TCC 溢出中断
 }
 
 //====================================================================//
-// 需求1：上电延时 500ms + 晶振检测
-//   延时由 TCC（LXT 驱动）硬件产生，不是软件空循环。
-//   晶振未起振则永远等不到中断，死等在此，LED 保持全灭（芯片不工作）。
+// 需求1：上电延时一拍 + 时基起振检测
+//   延时由 TCC 硬件产生，不是软件空循环，真实耗时就是一次拍长。
+//   外部晶振未起振时永远等不到中断，死等在此，LED 保持全灭（芯片不工作）。
+//   内部 RC 时基下中断必然到来，本函数等价于"等第一拍"。
 //====================================================================//
 void file_osc_check(void)
 {
-    g_osc_ok = 0;
-    g_div    = 0;
+    g_osc_ok     = 0;
+    g_beat_ticks = 0;
 
     EI();
     while(g_osc_ok == 0)
@@ -254,10 +269,10 @@ void file_osc_check(void)
     DI();
 
     // 延时结束，计时从此刻重新开始
-    g_tick = 0;
-    g_div  = 0;
-    TCC    = TCC_RELOAD;
-    ISR    = 0x00;
+    g_tick       = 0;
+    g_beat_ticks = 0;
+    TCC          = TCC_RELOAD;
+    ISR          = 0x00;
 }
 
 //====================================================================//
@@ -403,7 +418,7 @@ void file_m2_run(void)
     while(g_m2on)
     {
         // 上升：2% 到 98%
-        for(d = 2; d <= M2_DMAX; d++)
+        for(d = 2; d <= M2_DUTY_MAX; d++)
         {
             g_d = d;
             g_e = M2_UNIT - d;
@@ -414,7 +429,7 @@ void file_m2_run(void)
         if(file_m2_peak_run() == 0) return;
 
         // 下降：98% 回到 2%
-        for(d = (M2_DMAX - 1); d >= 2; d--)
+        for(d = (M2_DUTY_MAX - 1); d >= 2; d--)
         {
             g_d = d;
             g_e = M2_UNIT - d;
@@ -428,7 +443,9 @@ void file_m2_run(void)
 }
 
 //====================================================================//
-// TCC 中断服务程序：500ms 一拍，M1/M2 循环与 6h/18h 全部在此推进
+// TCC 中断服务程序：凑满 TICKS_PER_BEAT 次中断即为一拍
+//   （内部 RC 时基 122 次 = 499.7ms；晶振时基 1 次 = 500ms）
+//   M1/M2 循环与 6h/18h 全部在此推进
 //   注意：清中断标志必须整字节写（不能用 BTC / AND）
 //====================================================================//
 void int_isr(void) __interrupt
@@ -441,14 +458,14 @@ void int_isr(void) __interrupt
         ISR = 0xFE;                // 清 TCIF
         TCC = TCC_RELOAD;          // 重装，同时清预分频器
 
-        g_div++;
-        if(g_div >= TICK_DIV)
+        g_beat_ticks++;
+        if(g_beat_ticks >= TICKS_PER_BEAT)
         {
-            g_div = 0;
+            g_beat_ticks = 0;
 
             if(g_osc_ok == 0)
             {
-                g_osc_ok = 1;      // 上电 500ms 到，晶振已正常起振
+                g_osc_ok = 1;      // 第一拍已到，时基开始工作
             }
             else
             {
